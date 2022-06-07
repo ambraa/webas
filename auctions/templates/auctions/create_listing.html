@@ -1,0 +1,12 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<div class="card" id="formcard" style="margin: 20px; padding:30px; float: center; width: 600px; height: 500px">
+<form action="{% url 'create_listing' %}" method="post"  enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value="Submit" class="btn btn-primary" span style="margin-left: 170px;">
+</form>
+</div>
+{% endblock %}

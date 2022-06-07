@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+    <h2>{{ category }}</h2>
+        
+    {% for product in products %}
+    <div class="card" style="margin: 10px; padding:10px; float: left; width: 250px;">
+        <p align="center"><a href="{% url 'category' product.id %}">{{ product.id }} </a></p>
+    <ul>
+        <li>Pavadinimas: {{product.pavadinimas}} </li>
+        <li>Price: {{product.kaina}} </li>
+        <li>Category: {{product.category}} </li>
+    
+    </div>
+    {% empty %}
+        <li>No categories</li>
+    </ul>
+
+
+    {% endfor %}
+
+    
+{% endblock %}

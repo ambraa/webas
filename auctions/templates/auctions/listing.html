@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>Listing:</h1>
+<div class="card" style="margin: 10px; padding:10px; float: left; width: 500px; border-color: #007bff; ">
+<ul>
+    <p align="center" style="color:#007bff ">{{ product.id }}</p>
+    <li><span style="color:#007bff ">Pavadinimas:</span> {{product.pavadinimas}} </li>
+    <li><span style="color:#007bff ">Kaina:</span> {{product.kaina}} </li>
+    <li><span style="color:#007bff ">Nuotrauka:</span> {{product.nuotrauka}}</li>
+    
+</ul>
+<br>
+
+<form action="addwatchlist/{{product.id}}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Add to Watchlist" class="btn btn-primary" span style="margin-left: 150px;">
+</form>
+</div>
+<br>
+
+
+</div>
+<br>
+
+
+
+{% endblock %}

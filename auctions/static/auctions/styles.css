@@ -1,0 +1,40 @@
+body {
+    padding: 10px;
+    background-color: #bcc9be;
+    /* background-image: url("fonas.png"); */
+    
+    
+}
+
+h1{
+    /* font-family: Georgia, serif; */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+
+.card {
+    background-color: #3b7c5a;
+    border-radius: 3rem ;
+    border-width: 3px;
+    /* position: absolute; */
+    display:flex;
+    width: 400px;
+    height: 300px;
+    margin: 40px; 
+    padding:10px; 
+    float: left;  
+    border-color:#3b7c5a;
+}
+.nav{
+    align-items: center;
+    padding-left: 37%;
+    
+}
+.nav-link{
+    color: #bcc9be;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Libre Baskerville', serif;
+}
