@@ -2,9 +2,9 @@
 <ul>
     {% for product in products %}
     
-        <li>{{ product.pavadinimas }}</li>
-        <li>{{ product.kaina }}</li>
-        <li>{{ product.nuotrauka }}</li>
+        <p>{{ product.pavadinimas }}</p>
+        <p>{{ product.kaina }}</p>
+        <p>{{ product.nuotrauka }}</p>
        
     {% empty %}
         <li>No Passengers.</li>

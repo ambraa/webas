@@ -18,6 +18,10 @@ class formCreateListing(ModelForm):
     class Meta:
         model = MenuListings
         fields = ["pavadinimas", "kaina", "nuotrauka"]
+        widgets={
+            'pavadinimas' :forms.TextInput(attrs={'class':'form-control'}),
+            'kaina' :forms.NumberInput(attrs={'class':'form-control'}),  
+        }
 
 class formWatchlist(ModelForm):
     class Meta:
@@ -26,6 +30,11 @@ class formWatchlist(ModelForm):
 
 def index(request):
     return render(request, "auctions/index.html",{
+        "products": MenuListings.objects.all()
+    })
+
+def menu2(request):
+    return render(request, "auctions/menu2.html",{
         "products": MenuListings.objects.all()
     })
 
@@ -66,16 +75,6 @@ def watchlist(request):
         "products": products
     }) 
 
-# def watchlist_remove(request, listing_pk):
-#     user = request.user
-#     listing = Listing.objects.get(pk=listing_pk)
-
-#     if WatchList.objects.filter(user=user, item=listing).exists():
-#         WatchList.objects.filter(user=user, item=listing).delete()
-#         messages.success(request, f'{listing.title} removed from watchlist.')
-        
-#     return redirect('listing', listing_pk=listing_pk)
-
 def watchlist_remove(request, product_id):
     if request.method == "POST":
         item = Watchlist()
@@ -94,7 +93,7 @@ def watchlist_remove(request, product_id):
         })
 
 
-def create_listing(request):
+def create_listing(request, ):
     if request.method == "POST":
         form = formCreateListing(request.POST, request.FILES)
         if form.is_valid():
@@ -114,11 +113,93 @@ def create_listing(request):
             "form": formCreateListing()
         })  
 
+
 def listing(request, product_id):
     product = MenuListings.objects.get(pk=product_id)
     return render(request, "auctions/listing.html", {
         "product": product
     })
+
+def remove_listing(request, product_id):
+    if request.method == 'POST':
+        product=MenuListings()
+        product.user = request.user.username
+        product.product_id = product_id
+        product = MenuListings.objects.get(pk=product_id).delete()
+        product = MenuListings.objects.filter(product_id=product_id, user = request.user.username).delete()
+        return render(request, "auctions/menu2.html",{
+            "product": product
+        })
+    else: 
+        return render(request, "auctions/menu2.html")
+
+
+# def watchlist_remove(request, product_id):
+#     if request.method == "POST":
+#         item = Watchlist()
+#         item.user = request.user.username
+#         item.product_id = product_id
+#         product = MenuListings.objects.get(id=product_id)
+#         watchlist = Watchlist.objects.filter(product_id=product_id, user = request.user.username).delete()
+#         return render(request, "auctions/watchlist.html",{
+#         "product": product,
+#         "watchlist": watchlist
+#         })
+        
+#     else: 
+#         return render(request, "auctions/listing.html", {
+#             "form": formWatchlist()
+#         })
+
+
+
+
+
+# def uzsakymai(request):
+#     # items = Watchlist.objects.all().order_by('user')
+#     items = Watchlist.objects.all()
+#     products = []
+#     user=request.user.username
+#     for item in items:
+#         # print(item)
+#         products.append(Watchlist.objects.get(id=item.product_id))
+#     empty = False
+#     if len(products) == 0:
+#         empty = True
+    
+#     return render(request, "auctions/uzsakymai.html", {
+#         "empty": empty,
+#         "products": products,
+#         "user": user
+#     }) 
+
+def uzsakymai(request):
+    # items = Watchlist.objects.filter(user = request.user.username)
+    items = Watchlist.objects.all().order_by('user')
+    products = []
+    users =[]
+    for item in items:
+        
+        # products.append(item.user)
+        products.append(MenuListings.objects.get(id=item.product_id))
+        
+        product_user = item.user
+        if product_user not in users:
+            users.append(product_user)
+    empty = False
+    if len(products) == 0:
+        empty = True
+    
+    return render(request, "auctions/uzsakymai.html", {
+        "empty": empty,
+        "products": products,
+        "users": users
+    }) 
+
+
+
+
+
 
 
 

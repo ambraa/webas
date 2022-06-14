@@ -17,9 +17,11 @@ class MenuListings(models.Model):
     pavadinimas = models.CharField(max_length=64,)
     kaina = models.IntegerField()
     nuotrauka = models.ImageField(upload_to='images')  
+    
+    
 
     def __str__(self):
-        return f"{self.id}, {self.pavadinimas}, {self.kaina}, {self.nuotrauka} "
+        return f"{self.id}, {self.pavadinimas}, {self.kaina}, {self.nuotrauka}"
 
 class Bid(models.Model):
     user = models.CharField(max_length=64)

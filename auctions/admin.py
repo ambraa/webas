@@ -8,3 +8,7 @@ admin.site.register(MenuListings)
 
 from .models import Comment
 admin.site.register(Comment)
+
+from .models import Watchlist
+admin.site.register(Watchlist)
+

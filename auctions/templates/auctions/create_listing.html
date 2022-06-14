@@ -1,12 +1,13 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-
-<div class="card" id="formcard" style="margin: 20px; padding:30px; float: center; width: 600px; height: 500px">
+<div class="container">
+  <h2 align="center" style="font-family: 'Hahmlet', serif; color: #A25B5B; font-size: 40px;">Pridėti naują patiekalą</h2>
 <form action="{% url 'create_listing' %}" method="post"  enctype="multipart/form-data">
   {% csrf_token %}
   {{form.as_p}}
-  <input type="submit" value="Submit" class="btn btn-primary" span style="margin-left: 170px;">
+  <input type="submit" value="Submit" class="btn" style="width:90px; background-color:#A25B5B; margin-left:170px; font-size: 18px;" >
+  
 </form>
 </div>
 {% endblock %}

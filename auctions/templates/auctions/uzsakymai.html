@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Pirkinių užsakymas</h2>
+
+    {% for user in users %}
+        
+        {% for product in products %}
+            <div class="card" style="margin: 10px; padding:10px; float: left; width: 250px">
+                <p align="center"><a href="{% url 'uzsakymai' %}">{{ product.id }} </a></p>
+            <ul>
+                <li>Pirkejas: {{user}} </li>
+                <li>Pavadinimas: {{product.pavadinimas}} </li>
+                <li>Kaina: {{product.kaina}} </li>
+                <!-- <li>Nuotrauka: {{product.nuotrauka}} </li> -->
+                <br>
+                 
+            </div>
+        {% empty %}
+            <li>No products</li>
+        </ul>
+       
+        {% endfor %}
+    {% endfor %}
+   
+    
+        
+{% endblock %}

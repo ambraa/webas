@@ -1,0 +1,1 @@
+<button onclick="'/watchlist'">Continue</button>
